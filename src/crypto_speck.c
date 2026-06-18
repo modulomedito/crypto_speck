@@ -190,7 +190,7 @@ static crypto_speck_Ret crypto_speck_speck64_expand_key(
 //==================================================================================================
 // TEST
 //==================================================================================================
-#define CRYPTO_SPECK_DEBUG (1)
+#define CRYPTO_SPECK_DEBUG (0)
 
 #if defined(CRYPTO_SPECK_DEBUG) && (CRYPTO_SPECK_DEBUG > 0)
 #include <stdio.h>
