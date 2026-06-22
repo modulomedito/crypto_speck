@@ -22,8 +22,6 @@
 #define CRYPTO_SPECK_ROTR32(x, r) (((x) >> (r)) | ((x) << (32U - (r))))
 #define CRYPTO_SPECK_ROTL32(x, r) (((x) << (r)) | ((x) >> (32U - (r))))
 
-#define CRYPTO_SPECK_SPECK64_KEY_U8_NUM (16U)
-
 //==================================================================================================
 // PRIVATE TYPEDEF
 //==================================================================================================
@@ -173,8 +171,10 @@ crypto_speck_Ret crypto_speck_Speck64_update(crypto_speck_Speck64 *self, Slice_c
 
                 crypto_speck_Ret ret = crypto_speck_speck64_encrypt_block(
                     self,
-                    (Slice_u8){.ptr = &self->data.ptr[self->output_len],
-                               .len = CRYPTO_SPECK_SPECK64_BLOCK_U8_NUM},
+                    (Slice_u8){
+                        .ptr = &self->data.ptr[self->output_len],
+                        .len = CRYPTO_SPECK_SPECK64_BLOCK_U8_NUM
+                    },
                     (Slice_cu8){.ptr = self->residue_buf, .len = CRYPTO_SPECK_SPECK64_BLOCK_U8_NUM}
                 );
                 if (ret != crypto_speck_Ret_Ok) {
@@ -201,8 +201,10 @@ crypto_speck_Ret crypto_speck_Speck64_update(crypto_speck_Speck64 *self, Slice_c
 
                 crypto_speck_Ret ret = crypto_speck_speck64_decrypt_block(
                     self,
-                    (Slice_u8){.ptr = &self->data.ptr[self->output_len],
-                               .len = CRYPTO_SPECK_SPECK64_BLOCK_U8_NUM},
+                    (Slice_u8){
+                        .ptr = &self->data.ptr[self->output_len],
+                        .len = CRYPTO_SPECK_SPECK64_BLOCK_U8_NUM
+                    },
                     (Slice_cu8){.ptr = self->residue_buf, .len = CRYPTO_SPECK_SPECK64_BLOCK_U8_NUM}
                 );
                 if (ret != crypto_speck_Ret_Ok) {
@@ -250,8 +252,10 @@ crypto_speck_Ret crypto_speck_Speck64_finalize(crypto_speck_Speck64 *self) {
 
             ret = crypto_speck_speck64_encrypt_block(
                 self,
-                (Slice_u8){.ptr = &self->data.ptr[self->output_len],
-                           .len = CRYPTO_SPECK_SPECK64_BLOCK_U8_NUM},
+                (Slice_u8){
+                    .ptr = &self->data.ptr[self->output_len],
+                    .len = CRYPTO_SPECK_SPECK64_BLOCK_U8_NUM
+                },
                 (Slice_cu8){.ptr = plain_block, .len = CRYPTO_SPECK_SPECK64_BLOCK_U8_NUM}
             );
             if (ret == crypto_speck_Ret_Ok) {
